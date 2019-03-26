@@ -21,9 +21,13 @@ parser.add_argument('--num-hidden-units', '-n', type=int, default=512)
 parser.add_argument('--dropout', '-d', type=float, default=0.25)
 parser.add_argument('--momentum', '-m', type=float, default=0.85)
 args = parser.parse_args()
-    
-for arg_name, arg_value in vars(args).items():
-    mlflow.log_param(arg_name, arg_value)
+
+mlflow.log_param("batch_size", args.batch_size)
+mlflow.log_param("epochs", args.epochs)
+mlflow.log_param("learning-rate", args.learning_rate)
+mlflow.log_param("hidden-units", args.num_hidden_units)
+mlflow.log_param("dropout", args.dropout)
+mlflow.log_param("momentum", args.momentum)
 
 mnist = keras.datasets.mnist
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
