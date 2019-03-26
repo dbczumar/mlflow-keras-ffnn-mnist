@@ -48,9 +48,15 @@ model.compile(optimizer=optimizer,
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
+class LogMetricsCallback(keras.callbacks.Callback):
+    def on_epoch_end(self, logs={}):
+        mlflow.log_metric("accuracy", logs["acc"])
+        mlflow.log_metric("crossentropy_loss", logs["loss"])
+
 model.fit(x_train, y_train, 
           epochs=args.epochs, 
-          batch_size=args.batch_size)
+          batch_size=args.batch_size,
+          callbacks=[LogMetricsCallback()])
 
 test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
 mlflow.log_metric("test_loss", test_loss)
