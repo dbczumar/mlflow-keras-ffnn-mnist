@@ -1,0 +1,19 @@
+name: train_keras_ffnn_model
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      batch-size: {type: int, default: 512}
+      learning-rate: {type: float, default: 0.05}
+      epochs: {type: int, default: 4}
+      dropout: {type: int, default: 0.25}
+      num-hidden-units: {type: int, default: 512}
+    command: |
+          python train.py \
+            --batch-size {batch-size} \
+            --epochs {epochs} \
+            --learning-rate {learning-rate} \
+            --dropout {dropout} \
+            --num-hidden-units {num-hidden-units}
