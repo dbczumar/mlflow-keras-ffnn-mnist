@@ -19,7 +19,7 @@ parser.add_argument('--epochs', '-e', type=int, default=4)
 parser.add_argument('--learning-rate', '-l', type=float, default=0.05)
 parser.add_argument('--num-hidden-units', '-n', type=int, default=512)
 parser.add_argument('--dropout', '-d', type=float, default=0.25)
-parser.add_argument('--momentum', '-d', type=float, default=0.85)
+parser.add_argument('--momentum', '-m', type=float, default=0.85)
 args = parser.parse_args()
     
 for arg_name, arg_value in vars(args).items():
