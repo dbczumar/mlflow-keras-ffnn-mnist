@@ -13,7 +13,8 @@ from mlflow.pyfunc import PythonModel
 from mlflow.utils.file_utils import TempDir
 from mlflow.utils.environment import _mlflow_conda_env
 
-parser = argparse.ArgumentParser(description='Train a Keras CNN model for MNIST classification in PyTorch')
+parser = argparse.ArgumentParser(
+    description='Train a Keras feed-forward network for MNIST classification in PyTorch')
 parser.add_argument('--batch-size', '-b', type=int, default=128)
 parser.add_argument('--epochs', '-e', type=int, default=4)
 parser.add_argument('--learning-rate', '-l', type=float, default=0.05)
@@ -32,7 +33,7 @@ with mlflow.start_run():
 
     model = keras.models.Sequential([
       keras.layers.Flatten(input_shape=x_train[0].shape),
-      keras.layers.Dense(args.learning_rate, activation=tf.nn.relu),
+      keras.layers.Dense(args.num_hidden_units, activation=tf.nn.relu),
       keras.layers.Dropout(args.dropout),
       keras.layers.Dense(10, activation=tf.nn.softmax)
     ])
