@@ -46,8 +46,8 @@ class LogMetricsCallback(keras.callbacks.Callback):
         mlflow.log_metric("training_loss", logs["loss"])
         mlflow.log_metric("training_accuracy", logs["acc"])
 
-model.fit(x_train, y_train, 
-          epochs=args.epochs, 
+model.fit(x_train, y_train,
+          epochs=args.epochs,
           batch_size=args.batch_size,
           callbacks=[LogMetricsCallback()])
 
