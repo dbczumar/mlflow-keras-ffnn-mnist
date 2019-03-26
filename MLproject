@@ -17,5 +17,5 @@ entry_points:
             --epochs {epochs} \
             --learning-rate {learning-rate} \
             --dropout {dropout} \
-            --num-hidden-units {num-hidden-units}
+            --num-hidden-units {num-hidden-units} \
             --momentum {momentum}
