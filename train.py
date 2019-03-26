@@ -39,7 +39,7 @@ with mlflow.start_run():
     ])
 
     optimizer = keras.optimizers.SGD(lr=args.learning_rate,
-                                     momentum=1.0,
+                                     momentum=0.9,
                                      nesterov=True)
 
     model.compile(optimizer=optimizer,
