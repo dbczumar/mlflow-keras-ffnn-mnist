@@ -49,7 +49,7 @@ model.compile(optimizer=optimizer,
               metrics=['accuracy'])
 
 class LogMetricsCallback(keras.callbacks.Callback):
-    def on_epoch_end(self, logs={}):
+    def on_epoch_end(self, epoch, logs={}):
         mlflow.log_metric("accuracy", logs["acc"])
         mlflow.log_metric("crossentropy_loss", logs["loss"])
 
