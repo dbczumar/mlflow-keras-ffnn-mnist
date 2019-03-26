@@ -7,6 +7,7 @@ entry_points:
     parameters:
       batch-size: {type: int, default: 256}
       learning-rate: {type: float, default: 0.05}
+      momentum: {type: float, default: 0.85}
       epochs: {type: int, default: 4}
       dropout: {type: float, default: 0.25}
       num-hidden-units: {type: int, default: 512}
@@ -17,3 +18,4 @@ entry_points:
             --learning-rate {learning-rate} \
             --dropout {dropout} \
             --num-hidden-units {num-hidden-units}
+            --momentum {momentum}
