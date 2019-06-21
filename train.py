@@ -43,8 +43,8 @@ model.compile(optimizer=optimizer,
 
 class LogMetricsCallback(keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
-        mlflow.log_metric("training_loss", logs["loss"])
-        mlflow.log_metric("training_accuracy", logs["acc"])
+        mlflow.log_metric("training_loss", logs["loss"], epoch)
+        mlflow.log_metric("training_accuracy", logs["acc"], epoch)
 
 model.fit(x_train, y_train,
           epochs=args.epochs,
