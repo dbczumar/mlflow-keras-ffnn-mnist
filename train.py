@@ -64,7 +64,6 @@ conda_env = _mlflow_conda_env(
     ],
     additional_pip_deps=[
         "cloudpickle=={}".format(cloudpickle.__version__),
-        "mlflow=={}".format(mlflow.__version__),
     ])
 
 class KerasMnistCNN(PythonModel):
