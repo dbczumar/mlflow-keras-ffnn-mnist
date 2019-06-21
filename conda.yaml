@@ -4,6 +4,7 @@ channels:
   - pytorch
 dependencies:
   - python=3.6
+  - boto3
   - keras
   - tensorflow-gpu
   - pip:
