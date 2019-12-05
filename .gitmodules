@@ -1,0 +1,3 @@
+[submodule "keras-sub"]
+	path = keras-sub
+	url = https://github.com/keras-team/keras
