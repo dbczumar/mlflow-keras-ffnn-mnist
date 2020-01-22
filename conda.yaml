@@ -7,3 +7,5 @@ dependencies:
   - cloudpickle
   - keras
   - tensorflow-gpu
+  - pip:
+    - mlflow==1.3.0
