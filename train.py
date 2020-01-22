@@ -12,6 +12,10 @@ import mlflow.pyfunc
 from mlflow.pyfunc import PythonModel
 from mlflow.utils.environment import _mlflow_conda_env
 
+mlflow.start_run()
+
+mlflow.keras.autolog()
+
 parser = argparse.ArgumentParser(
     description='Train a Keras feed-forward network for MNIST classification in PyTorch')
 parser.add_argument('--batch-size', '-b', type=int, default=128)
@@ -41,21 +45,11 @@ model.compile(optimizer=optimizer,
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-class LogMetricsCallback(keras.callbacks.Callback):
-    def on_epoch_end(self, epoch, logs={}):
-        mlflow.log_metric("training_loss", logs["loss"], epoch)
-        mlflow.log_metric("training_accuracy", logs["acc"], epoch)
-
 model.fit(x_train, y_train,
           epochs=args.epochs,
-          batch_size=args.batch_size,
-          callbacks=[LogMetricsCallback()])
+          batch_size=args.batch_size)
 
 test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
-mlflow.log_metric("test_loss", test_loss)
-mlflow.log_metric("test_accuracy", test_acc)
-
-mlflow.keras.log_model(model, artifact_path="keras-model")
 
 conda_env = _mlflow_conda_env(
     additional_conda_deps=[
@@ -79,12 +73,11 @@ class KerasMnistCNN(PythonModel):
             return self.model.predict(input_df.values.reshape(-1, 28, 28))
 
 mlflow.pyfunc.log_model(
-    artifact_path="keras-pyfunc",
+    artifact_path="model",
     python_model=KerasMnistCNN(),
     artifacts={
-        "keras-model": mlflow.get_artifact_uri("keras-model")
+        "keras-model": mlflow.get_artifact_uri("model")
     },
     conda_env=conda_env)
 
-print(mlflow.active_run().info.run_uuid)
-
+mlflow.end_run()
