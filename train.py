@@ -63,6 +63,7 @@ conda_env = _mlflow_conda_env(
 class KerasMnistCNN(PythonModel):
 
     def load_context(self, context):
+        import tensorflow as tf
         self.graph = tf.Graph()
         with self.graph.as_default():
             K.set_learning_phase(0)
